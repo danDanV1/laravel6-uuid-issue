@@ -46,7 +46,7 @@ You can see the `post` record being created with a binary `id` and foreign key `
   4 => '2019-11-27 05:39:57',
 ```
 
-But if you try to query the relationship, eg. `$user->->posts` the cast value of `user_id` is used.
+But if you try to query the relationship, eg. `$user->posts` the cast value of `user_id` is used.
 ```
 [2019-11-27 05:39:57] local.INFO: select * from `posts` where `posts`.`user_id` = ? and `posts`.`user_id` is not null  
 [2019-11-27 05:39:57] local.INFO: array (
