@@ -1,10 +1,11 @@
 ## Reproduction of issue
 
 Just run
-php artisan migrate:fresh --seed
+`php artisan migrate:fresh --seed`
 
 You should see this:
 
+```
 Dropped all tables successfully.
 Migration table created successfully.
 Migrating: 2014_10_12_000000_create_users_table
@@ -25,5 +26,5 @@ Found # of flower->petals relations: 3
 Found # of users: 1
 Found # of posts: 3
 Found # of user->posts relations: 0
-
+```
 Using binary uuid, we can create the related records just fine, but Laravel 6 can't related records after they've been created!
