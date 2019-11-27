@@ -28,3 +28,6 @@ Found # of posts: 3
 Found # of user->posts relations: 0
 ```
 Using binary uuid, we can create the related records just fine, but Laravel 6 can't related records after they've been created!
+
+`users` and `posts` are using UUID binary for their IDs.
+`flower` and `petals` are using regular int for their IDs.
