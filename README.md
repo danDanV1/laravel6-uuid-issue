@@ -31,3 +31,25 @@ Using binary uuid, we can create the related records just fine, but Laravel 6 ca
 
 `users` and `posts` are using UUID binary for their IDs.
 `flower` and `petals` are using regular int for their IDs.
+
+Take a look at `storage/logs` for mysql logging output.
+
+You can see the `post` record being created with a binary `id` and foreign key `user_id`
+```
+[2019-11-27 05:39:57] local.INFO: insert into `posts` (`title`, `user_id`, `id`, `updated_at`, `created_at`) values (?, ?, ?, ?, ?)  
+[2019-11-27 05:39:57] local.INFO: array (
+  0 => 'Veniam error quod minima. Error laborum voluptatum sunt exercitationem dolor. Quis qui ipsa occaecati iste minus dolor omnis.',
+  1 => '=��K�WE3��wQ
+��',
+  2 => '�7n��kLS�T$�L�',
+  3 => '2019-11-27 05:39:57',
+  4 => '2019-11-27 05:39:57',
+```
+
+But if you try to query the relationship, eg. `$user->->posts` the cast value of `user_id` is used.
+```
+[2019-11-27 05:39:57] local.INFO: select * from `posts` where `posts`.`user_id` = ? and `posts`.`user_id` is not null  
+[2019-11-27 05:39:57] local.INFO: array (
+  0 => '3d93a84b-fb57-4533-96ab-1c77510ab4e0',
+)  
+```
