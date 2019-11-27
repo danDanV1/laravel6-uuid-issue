@@ -6,9 +6,18 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Dyrynda\Database\Support\GeneratesUuid;
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, GeneratesUuid;
+
+    protected $casts = ['id' => 'uuid', 'email_verified_at' => 'datetime',];
+
+    public function uuidColumn(): string
+    {
+        return 'id';
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -28,12 +37,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }

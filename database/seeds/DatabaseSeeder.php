@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use Faker\Factory as Faker;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $faker = Faker::create();
+
+        $user = app()->make('App\User');
+        $user->name = $faker->firstName;
+        $user->email = $faker->email;
+        $user->password = "foo";
+        $user->save();
+
+        $post = app()->make('App\Post');
+        $post->title = $faker->text(200);
+        $post->user()->associate($user);
+        $post->save();
     }
 }
