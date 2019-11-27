@@ -9,11 +9,13 @@ class Post extends Model
 {
     use GeneratesUuid;
 
-    protected $casts = ['id' => 'uuid'];
+    protected $casts = ['id' => 'uuid', 'user_id' => 'uuid'];
 
-    public function uuidColumn(): string
+    public $incrementing = false;
+
+    public function uuidColumns(): array
     {
-        return 'id';
+        return ['id', 'user_id'];
     }
 
 

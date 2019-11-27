@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use Notifiable, GeneratesUuid;
 
+    public $incrementing = false;
+
     protected $casts = ['id' => 'uuid', 'email_verified_at' => 'datetime',];
 
     public function uuidColumn(): string
